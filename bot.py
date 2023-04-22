@@ -39,7 +39,7 @@ async def get_shortlink(link):
     async with aiohttp.ClientSession() as session:
         async with session.get(url, params=params, raise_for_status=True) as response:
             data = await response.json()
-            return data["file_code"]
+            return data["result"]["file_code"]
 
 
 bot.run()
