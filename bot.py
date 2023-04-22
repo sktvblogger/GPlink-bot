@@ -2,10 +2,10 @@ from os import environ
 import aiohttp
 from pyrogram import Client, filters
 
-API_ID = environ.get('API_ID')
-API_HASH = environ.get('API_HASH')
-BOT_TOKEN = environ.get('BOT_TOKEN')
-API_KEY = environ.get('API_KEY')
+API_ID = environ.get('API_ID', '4546803')
+API_HASH = environ.get('API_HASH', '08ad181fba3b05e1141db96175cab60e')
+BOT_TOKEN = environ.get('BOT_TOKEN', '6027500067:AAG-veKTUgl3nSIT2rpiK_FMAWv_60vPDqg')
+PDISK_KEY = "99xz8zhn3shdv021ws"
 
 bot = Client('gplink bot',
              api_id=API_ID,
@@ -33,13 +33,13 @@ async def link_handler(bot, message):
 
 
 async def get_shortlink(link):
-    url = 'https://gplinks.in/api'
-    params = {'api': API_KEY, 'url': link}
+    url = 'https://pdisk.pro/api/upload/url'
+    params = {'key': PDISK_KEY, 'url': url, 'fld_id': 0}
 
     async with aiohttp.ClientSession() as session:
         async with session.get(url, params=params, raise_for_status=True) as response:
             data = await response.json()
-            return data["shortenedUrl"]
+            return data["file_code"]
 
 
 bot.run()
