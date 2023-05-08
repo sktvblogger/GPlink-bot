@@ -33,10 +33,10 @@ for response in responses:
 async def link_handler(bot, message):
     link = message.matches[0].group(0)
     try:
-        responses = await pdisk.upload_remote_file("https://example.com/f ", folder_id=12345)
+        responses = await pdisk.upload_remote_file(link)
         for response in responses:
         print(response)
-        await message.reply(f'Here is your https://pdisk.pro/{short_link}', quote=True)
+        await message.reply(f'Here is your https://pdisk.pro/{responses}', quote=True)
     except Exception as e:
         await message.reply(f'Error: {e}', quote=True)
 
