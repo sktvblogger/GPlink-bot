@@ -21,12 +21,21 @@ async def start(bot, message):
         f"**Hi {message.chat.first_name}!**\n\n"
         "I'm GPlink bot. Just send me link and get short link")
 
+# Upload a file from local storage
+responses = await pdisk.upload_file("/path/to/file")
+for response in responses:
+    print(response)
+
+# Upload a remote file
+responses = await pdisk.upload_remote_file("https://example.com/file.mp4", folder_id=12345)
+for response in responses:
+    print(response)
 
 @bot.on_message(filters.regex(r'https?://[^\s]+') & filters.private)
 async def link_handler(bot, message):
     link = message.matches[0].group(0)
     try:
-        short_link = await get_shortlink(link)
+        short_link = await pdisk.upload_remote_file(link)
         await message.reply(f'Here is your https://pdisk.pro/{short_link}', quote=True)
     except Exception as e:
         await message.reply(f'Error: {e}', quote=True)
