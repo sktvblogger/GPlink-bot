@@ -27,15 +27,15 @@ for response in responses:
     print(response)
 
 # Upload a remote file
-responses = await pdisk.upload_remote_file("https://example.com/file.mp4", folder_id=12345)
-for response in responses:
-    print(response)
+
 
 @bot.on_message(filters.regex(r'https?://[^\s]+') & filters.private)
 async def link_handler(bot, message):
     link = message.matches[0].group(0)
     try:
-        short_link = await pdisk.upload_remote_file(link)
+        responses = await pdisk.upload_remote_file("https://example.com/f ", folder_id=12345)
+        for response in responses:
+        print(response)
         await message.reply(f'Here is your https://pdisk.pro/{short_link}', quote=True)
     except Exception as e:
         await message.reply(f'Error: {e}', quote=True)
