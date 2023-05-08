@@ -33,7 +33,7 @@ for response in responses:
 async def link_handler(bot, message):
     link = message.matches[0].group(0)
     try:
-        responses = await pdisk.upload_remote_file(link)
+        responses = pdisk.upload_remote_file(link)
         print(response)
         await message.reply(f'Here is your https://pdisk.pro/{responses}', quote=True)
     except Exception as e:
