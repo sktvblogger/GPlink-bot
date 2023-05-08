@@ -21,10 +21,7 @@ async def start(bot, message):
         f"**Hi {message.chat.first_name}!**\n\n"
         "I'm GPlink bot. Just send me link and get short link")
 
-# Upload a file from local storage
-responses = await pdisk.upload_file("/path/to/file")
-for response in responses:
-    print(response)
+
 
 # Upload a remote file
 
